@@ -9,7 +9,6 @@
 
 CPlayer::CPlayer()
 {
-
 	//Each player begins the game with 30 health points. 
 	mHealth = 30;
 }
@@ -75,10 +74,17 @@ void CPlayer::assignFromFile(std::string filename)
 			<< "H: " << deck[count]->getHealth() << "	"
 			<< std::endl;
 #endif
+
 		//iterate for next card
 		count++;
 	}
 	mSize = count;
+}
+
+void CPlayer::removeTableCard(int v)
+{
+	std::swap(table[v], table.back());
+	table.pop_back();
 }
 
 //GETTERS

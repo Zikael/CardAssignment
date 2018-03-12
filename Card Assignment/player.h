@@ -34,7 +34,10 @@ public:
 	void setTableCard(int v);
 
 	//functions
+	//assign cards from file
 	void assignFromFile(std::string filepath);
+	//remove card item from vector
+	void removeTableCard(int v);
 };
 
 #endif

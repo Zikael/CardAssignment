@@ -123,7 +123,7 @@ int CGame::MainLoop()
 	srand(time(NULL));
 
 	//Header
-	std::cout << "Michael Oliva | Hearthpebble" << std::endl;
+	std::cout << "Michael Oliva | Hearthpebble" << std::endl << std::endl;
 
 	//draw Sorceress first card
 	sorceress->setHandCard(rand() % sorceress->getSizeOfDeck());
@@ -137,7 +137,7 @@ int CGame::MainLoop()
 	while (playing)
 	{
 		//check exit conditions
-		if (mRound >= 30) { return gameDraw; }
+		if (mRound >= mMAX_ROUND) { return gameDraw; }
 		if (wizard->getHealth() <= 0) { return gameLose; }
 
 		/* 
@@ -173,7 +173,7 @@ int CGame::MainLoop()
 
 		std::cout << "Wizard draws " << wizard->getTableCard(wizard->getSizeOfTable()-1).getName()
 			<< " (" << wizard->getTableCard(wizard->getSizeOfTable()-1).getHealth() << " hp)" << std::endl;
-		std::cout << "Card on table: " << std::endl;
+		std::cout << "Card(s) on table: " << std::endl;
 		for (int i = 0; i < wizard->getSizeOfTable(); i++)
 		{
 			std::cout << wizard->getTableCard(i).getName() << "	" << wizard->getTableCard(i).getHealth() 
@@ -182,7 +182,7 @@ int CGame::MainLoop()
 		std::cout << std::endl;
 
 		//ATTACK SORCERESS
-		for (int i = 0; i < wizard->getSizeOfTable(); i++)
+		for (int i = 0; i < wizard->getSizeOfTable(); ++i)
 		{
 			if (wizard->getTableCard(i).getType() == 1)
 			{
@@ -190,15 +190,18 @@ int CGame::MainLoop()
 				{
 					//Attack a random card in sorceress table 
 					int randCard = 0;
-					if (sorceress->getSizeOfTable() >= 2) { int randCard = rand() % sorceress->getSizeOfTable(); }
-					//sorceress->getTableCard(randCard).getHealth() - wizard->getTableCard(i).getAttack()
+					//if the sorceress has more than 1 card, randomly select a card to attack
+					if (sorceress->getSizeOfTable() >= 2) { randCard = rand() % sorceress->getSizeOfTable(); }
+
 					//set the health of the attacked card
-					sorceress->getTableCard(randCard).setHealth(-1);
+					sorceress->getTableCard(randCard).setHealth(sorceress->getTableCard(randCard).getHealth() - wizard->getTableCard(i).getAttack());
 					std::cout << wizard->getTableCard(i).getName() << " attacks " << sorceress->getTableCard(randCard).getName() << ". ";
 					if (sorceress->getTableCard(randCard).getHealth() <= 0)
 					{
-						//REMOVE CARD FROM DECK
+						//Display which card is killed
 						std::cout << sorceress->getTableCard(randCard).getName() << " killed." << std::endl;
+						//REMOVE CARD FROM DECK
+						sorceress->removeTableCard(randCard);
 					}
 					else { std::cout << sorceress->getTableCard(randCard).getName() << "'s health is now " << sorceress->getTableCard(randCard).getHealth() << std::endl; }
 				}
@@ -212,6 +215,14 @@ int CGame::MainLoop()
 				}
 			}
 		}
+
+#ifdef _DEBUG
+		std::cout << std::endl << std::endl << "Sorceress cards: " << std::endl;
+		for (int i = 0; i < sorceress->getSizeOfTable(); ++i)
+		{
+			std::cout << sorceress->getTableCard(i).getName() << std::endl;
+		}
+#endif
 
 		//end of round wait
 		pressToContinue();
