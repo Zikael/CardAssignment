@@ -9,6 +9,7 @@
 
 CPlayer::CPlayer()
 {
+
 	//Each player begins the game with 30 health points. 
 	mHealth = 30;
 }
@@ -81,15 +82,15 @@ void CPlayer::assignFromFile(std::string filename)
 }
 
 //GETTERS
-CCard CPlayer::getDeckCard(int v)
+CCard& CPlayer::getDeckCard(int v)
 {
 	return *deck[v];
 }
-CCard CPlayer::getHandCard(int v)
+CCard& CPlayer::getHandCard(int v)
 {
 	return *hand[v];
 }
-CCard CPlayer::getTableCard(int v)
+CCard& CPlayer::getTableCard(int v)
 {
 	return *table[v];
 }

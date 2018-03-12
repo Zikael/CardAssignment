@@ -24,9 +24,9 @@ public:
 	int getSizeOfDeck();
 	int getSizeOfHand();
 	int getSizeOfTable();
-	CCard getDeckCard(int v);
-	CCard getHandCard(int v);
-	CCard getTableCard(int v);
+	CCard& getDeckCard(int v);
+	CCard& getHandCard(int v);
+	CCard& getTableCard(int v);
 
 	//setters
 	void setHealth(int v);
