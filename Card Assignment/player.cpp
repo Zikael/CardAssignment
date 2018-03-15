@@ -7,6 +7,10 @@
 #include <sstream>
 #include <iostream>
 
+#ifndef _TYPES_H
+	#include "types.h"
+#endif
+
 CPlayer::CPlayer()
 {
 	//Each player begins the game with 30 health points. 
@@ -45,9 +49,6 @@ void CPlayer::assignFromFile(std::string filename)
 	int count = 0;
 	while (file.good())
 	{
-		//add new element to the array for each card
-		deck.push_back(new CCard);
-
 		//load the fline from the file and place into stringstream
 		std::getline(file, line);
 		std::stringstream ss(line);
@@ -57,6 +58,29 @@ void CPlayer::assignFromFile(std::string filename)
 		std::getline(ss, name, ' ');
 		std::getline(ss, attack, ' ');
 		std::getline(ss, health, '\n');
+
+		//add new element to the array for each card (dependant of card type)
+		switch (std::stoi(type))
+		{
+		case 1:
+			deck.push_back(new CMinion);
+			break;
+		case 2:
+			deck.push_back(new CFireball);
+			break;
+		case 3:
+			deck.push_back(new CLightning);
+			break;
+		case 4:
+			deck.push_back(new CBless);
+			break;
+		case 5:
+			deck.push_back(new CVampire);
+			break;
+		default: //generic card -- this should never be called (just in case)
+			deck.push_back(new CCard);
+			break;
+		}
 
 		//assign varibles to class
 		deck[count]->setType(std::stoi(type));

@@ -24,8 +24,14 @@ public:
 	~CGame();
 
 	//setters
+	//set number of rounds
 	void setRounds(int v);
+
 	//getters
+
+	//returns a seed from the file
+	int getSeed();
+	//return number of rounds
 	int getRounds();
 
 	//manager for the logic loop, handles win/lose/draw

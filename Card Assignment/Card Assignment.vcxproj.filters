@@ -33,6 +33,24 @@
     <ClInclude Include="smartPointer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="minion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Fireball.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lightning.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bless.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="vampire.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

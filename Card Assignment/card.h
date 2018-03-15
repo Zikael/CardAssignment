@@ -3,6 +3,7 @@
 
 #include <string>
 
+class CPlayer;
 class CCard 
 {
 private:
@@ -25,6 +26,8 @@ public:
 	std::string getName();
 	int getAttack();
 	int getHealth();
+
+	virtual void play(CPlayer*& player1, CPlayer*& player2, int index, bool playerControl) { return; };
 };
 
 #endif	

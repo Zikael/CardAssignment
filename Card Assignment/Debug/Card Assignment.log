@@ -1,10 +1,5 @@
 ﻿  player.cpp
-  Generating Code...
-  Compiling...
   game.cpp
-c:\users\zikael\source\repos\card assignment\card assignment\game.cpp(123): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   Generating Code...
-c:\users\zikael\source\repos\card assignment\card assignment\game.cpp(222): warning C4715: 'CGame::MainLoop': not all control paths return a value
-  Skipping... (no relevant changes detected)
-  Card Assignment.cpp
+c:\users\zikael\source\repos\card assignment\card assignment\game.cpp(245): warning C4715: 'CGame::MainLoop': not all control paths return a value
   Card Assignment.vcxproj -> C:\Users\Zikael\source\repos\Card Assignment\Debug\Card Assignment.exe
