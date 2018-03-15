@@ -51,6 +51,12 @@
     <ClInclude Include="vampire.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="horde.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="trample.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

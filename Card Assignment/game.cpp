@@ -27,9 +27,9 @@ void CGame::gameManager()
 	int gameResult = MainLoop();
 	drawLine();
 	for (int i = 0; i < 8; ++i) { std::cout << std::endl; }
-	if (gameResult == gameDraw) { std::cout << std::endl << "\t\t\tWell played! Game drawn!" << std::endl; }
+	if (gameResult == gameDraw) { std::cout << std::endl << "\t\t\t\tWell played! Game drawn!" << std::endl; }
 	if (gameResult == gameWin) { std::cout << std::endl << "\t\t\tSorceress Defeated! You win!" << std::endl; }
-	if (gameResult == gameLose) { std::cout << std::endl << "\t\t\tYou died! Game over." << std::endl; }
+	if (gameResult == gameLose) { std::cout << std::endl << "\t\t\t\tYou died! Game over." << std::endl; }
 	for (int i = 0; i < 10; ++i) { std::cout << std::endl; }
 	drawLine();
 }
@@ -39,7 +39,7 @@ int CGame::getSeed()
 #ifdef _DEBUG
 	std::ifstream file("..\\Debug\\seed.txt");
 #else
-	std::ifstream file("..\\seed.txt");
+	std::ifstream file("..\\Release\\seed.txt");
 #endif
 	std::string line;
 	if (!file)
@@ -135,8 +135,8 @@ int CGame::MainLoop()
 	sorceress->assignFromFile("..\\Debug\\sorceress.txt");
 	wizard->assignFromFile("..\\Debug\\wizard.txt");
 #else
-	sorceress->assignFromFile("..\\sorceress.txt");
-	wizard->assignFromFile("..\\wizard.txt");
+	sorceress->assignFromFile("..\\Release\\sorceress.txt");
+	wizard->assignFromFile("..\\Release\\wizard.txt");
 #endif
 	/*
 	The text outputted must use the following format :
@@ -145,7 +145,7 @@ int CGame::MainLoop()
 	Wizard begins with <card name>
 	*/
 
-	//TODO implement random feature using seed file instead
+	//TODO use provided random function
 	srand(getSeed());
 
 	//Header

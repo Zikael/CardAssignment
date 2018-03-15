@@ -77,6 +77,12 @@ void CPlayer::assignFromFile(std::string filename)
 		case 5:
 			deck.push_back(new CVampire);
 			break;
+		case 7:
+			deck.push_back(new CHorde);
+			break;
+		case 8:
+			deck.push_back(new CTrample);
+			break;
 		default: //generic card -- this should never be called (just in case)
 			deck.push_back(new CCard);
 			break;

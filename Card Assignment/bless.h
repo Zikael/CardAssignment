@@ -24,7 +24,7 @@ class CBless : public CCard
 			}
 			playerHit->getTableCard(randCard).setHealth(playerHit->getTableCard(randCard).getHealth() - playerAttack->getTableCard(index).getAttack());
 			std::cout << playerAttack->getTableCard(index).getName() << " attacks " << playerHit->getTableCard(randCard).getName() << ". "
-				<< playerHit->getTableCard(randCard).getName() << "'s health is now " << playerHit->getTableCard(randCard).getHealth();
+				<< playerHit->getTableCard(randCard).getName() << "'s health is now " << playerHit->getTableCard(randCard).getHealth() << std::endl;
 		}
 		else if (randChoice == 1)
 		{
@@ -44,7 +44,7 @@ class CBless : public CCard
 			}
 			playerAttack->getTableCard(randCard).setHealth(playerAttack->getTableCard(randCard).getHealth() + playerAttack->getTableCard(index).getAttack());
 			std::cout << playerAttack->getTableCard(index).getName() << " heals " << playerAttack->getTableCard(randCard).getName() << ". "
-				<< playerAttack->getTableCard(randCard).getName() << "'s health is now " << playerAttack->getTableCard(randCard).getHealth();
+				<< playerAttack->getTableCard(randCard).getName() << "'s health is now " << playerAttack->getTableCard(randCard).getHealth() << std::endl;
 		}
 		else if (randChoice == 3)
 		{
