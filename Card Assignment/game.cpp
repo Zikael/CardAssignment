@@ -96,12 +96,14 @@ std::string CGame::displayType(int v)
 }
 int CGame::playCard()
 {
+	//TODO: fix validating inputs
 	bool validInput = false;
 	int cardNum;
 	while (!validInput)
 	{
 		std::cout << "Select a card number to play: ";
 		std::cin >> cardNum;
+
 		if (cardNum >= 0 && cardNum < wizard->getSizeOfHand()) { validInput = true; }
 		else
 		{

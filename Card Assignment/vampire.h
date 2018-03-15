@@ -12,15 +12,26 @@ class CVampire: public CCard
 	{
 		if (playerHit->getSizeOfTable() > 0)
 		{
-			//TODO: make damage perminant
-
-			//Attack a random card in player1 table 
 			int randCard = 0;
-			//if the player1 has more than 1 card, randomly select a card to attack
-			if (playerHit->getSizeOfTable() >= 2) { randCard = rand() % playerHit->getSizeOfTable(); }
+			//Detect if the enemy has a wall, if so, only attack the wall
+			int wallType = 6;
+			for (int i = 0; i < playerHit->getSizeOfTable(); ++i)
+			{
+				if (playerHit->getTableCard(i).getType() == wallType)
+				{
+					randCard = i;
+				}
+				else
+				{
+					//Attack a random card in player1 table 
+					//if the player1 has more than 1 card, randomly select a card to attack
+					if (playerHit->getSizeOfTable() >= 2) { randCard = rand() % playerHit->getSizeOfTable(); }
+				}
+			}
 
 			//set the health of the attacked card
 			playerHit->getTableCard(randCard).setHealth(playerHit->getTableCard(randCard).getHealth() - playerAttack->getTableCard(index).getAttack());
+			if (playerHit->getTableCard(randCard).getArmour()) { playerHit->getTableCard(randCard).setHealth(playerHit->getTableCard(randCard).getHealth() + 1); }
 			std::cout << playerAttack->getTableCard(index).getName() << " attacks " << playerHit->getTableCard(randCard).getName() << ". ";
 			if (playerHit->getTableCard(randCard).getHealth() <= 0)
 			{

@@ -26,6 +26,10 @@ void CCard::setType(int v)
 {
 	mType = v;
 }
+void CCard::setArmour(bool b)
+{
+	mArmour = b;
+}
 
 //getters
 int CCard::getAttack()
@@ -43,4 +47,8 @@ int CCard::getHealth()
 int CCard::getType()
 {
 	return mType;
+}
+bool CCard::getArmour()
+{
+	return mArmour;
 }

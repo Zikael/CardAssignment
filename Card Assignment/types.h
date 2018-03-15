@@ -9,5 +9,8 @@
 
 #include "horde.h"
 #include "trample.h"
+#include "leech.h"
+#include "sword.h"
+#include "armour.h"
 
 #endif

@@ -17,6 +17,7 @@ class CLightning: public CCard
 			{
 				playerHit->getTableCard(i).setHealth(playerHit->getTableCard(i).getHealth() - playerAttack->getTableCard(index).getAttack());
 				std::cout << playerAttack->getTableCard(index).getName() << " attacks " << playerHit->getTableCard(i).getName() << ". ";
+				if (playerHit->getTableCard(i).getArmour()) { playerHit->getTableCard(i).setHealth(playerHit->getTableCard(i).getHealth() + 1); }
 				if (playerHit->getTableCard(i).getHealth() <= 0)
 				{
 					//Display which card is killed

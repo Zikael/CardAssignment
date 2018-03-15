@@ -77,13 +77,25 @@ void CPlayer::assignFromFile(std::string filename)
 		case 5:
 			deck.push_back(new CVampire);
 			break;
+		case 6: //Wall type is not a special class, just uses generic type
+			deck.push_back(new CCard);
+			break;
 		case 7:
 			deck.push_back(new CHorde);
 			break;
 		case 8:
 			deck.push_back(new CTrample);
 			break;
-		default: //generic card -- this should never be called (just in case)
+		case 9:
+			deck.push_back(new CLeech);
+			break;
+		case 10:
+			deck.push_back(new CSword);
+			break;
+		case 11:
+			deck.push_back(new CArmour);
+			break;
+		default: //generic card -- should not be used, just in case.
 			deck.push_back(new CCard);
 			break;
 		}
@@ -93,7 +105,7 @@ void CPlayer::assignFromFile(std::string filename)
 		deck[count]->setName(name);
 		deck[count]->setAttack(std::stoi(attack));
 		deck[count]->setHealth(std::stoi(health));
-
+		deck[count]->setArmour(false);	//by default no minion should have armour
 
 #if _DEBUG
 		std::cout

@@ -51,6 +51,7 @@ class CFireball : public CCard
 		else
 		{
 			playerHit->getTableCard(cardNum).setHealth(playerHit->getTableCard(cardNum).getHealth() - playerAttack->getTableCard(index).getAttack());
+			if (playerHit->getTableCard(cardNum).getArmour()) { playerHit->getTableCard(cardNum).setHealth(playerHit->getTableCard(cardNum).getHealth() + 1); }
 			std::cout << playerAttack->getTableCard(index).getName() << " attacks " << playerHit->getTableCard(cardNum).getName() << ". ";
 			if (playerHit->getTableCard(cardNum).getHealth() <= 0)
 			{
