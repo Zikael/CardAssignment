@@ -12,9 +12,10 @@ private:
 	int mAttack;
 	int mHealth;
 	bool mArmour;
+	bool mRemove;
 public:
 	CCard();
-	~CCard();
+	virtual ~CCard();
 
 	//setters
 	void setType(int v);
@@ -22,6 +23,7 @@ public:
 	void setAttack(int v);
 	void setHealth(int v);
 	void setArmour(bool b);
+	void setRemove(bool b);
 
 	//getters
 	int getType();
@@ -29,6 +31,7 @@ public:
 	int getAttack();
 	int getHealth();
 	bool getArmour();
+	bool getRemove();
 
 	virtual void play(CPlayer*& player1, CPlayer*& player2, int index, bool playerControl) { return; };
 };

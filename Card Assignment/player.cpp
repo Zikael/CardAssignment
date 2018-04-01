@@ -18,18 +18,13 @@ CPlayer::CPlayer()
 }
 CPlayer::~CPlayer()
 {
+	/*
 	//delete pointer to card on player class temination
-	for (std::vector<CCard*>::iterator it = deck.begin(); it != deck.end(); it++) {
-		delete *it;
-	}
-	for (std::vector<CCard*>::iterator it = hand.begin(); it != hand.end(); it++) {
-		delete *it;
-	}
-	for (std::vector<CCard*>::iterator it = table.begin(); it != table.end(); it++) {
-		delete *it;
-	}
+	for (int i = 0; i < deck.size(); ++i)	{ delete deck[i]; }
+	for (int i = 0; i < hand.size(); ++i)	{ delete hand[i]; }
+	for (int i = 0; i < table.size(); ++i)	{ delete table[i]; }
+	*/
 }
-
 //assign values from file
 void CPlayer::assignFromFile(std::string filename)
 {
@@ -59,44 +54,47 @@ void CPlayer::assignFromFile(std::string filename)
 		std::getline(ss, attack, ' ');
 		std::getline(ss, health, '\n');
 
+		//shouldn't be reached, possible bug if health is null
+		if (type == "") { return; }
+
 		//add new element to the array for each card (dependant of card type)
 		switch (std::stoi(type))
 		{
 		case 1:
-			deck.push_back(new CMinion);
+			deck.emplace_back(new CMinion);
 			break;
 		case 2:
-			deck.push_back(new CFireball);
+			deck.emplace_back(new CFireball);
 			break;
 		case 3:
-			deck.push_back(new CLightning);
+			deck.emplace_back(new CLightning);
 			break;
 		case 4:
-			deck.push_back(new CBless);
+			deck.emplace_back(new CBless);
 			break;
 		case 5:
-			deck.push_back(new CVampire);
+			deck.emplace_back(new CVampire);
 			break;
 		case 6: //Wall type is not a special class, just uses generic type
-			deck.push_back(new CCard);
+			deck.emplace_back(new CCard);
 			break;
 		case 7:
-			deck.push_back(new CHorde);
+			deck.emplace_back(new CHorde);
 			break;
 		case 8:
-			deck.push_back(new CTrample);
+			deck.emplace_back(new CTrample);
 			break;
 		case 9:
-			deck.push_back(new CLeech);
+			deck.emplace_back(new CLeech);
 			break;
 		case 10:
-			deck.push_back(new CSword);
+			deck.emplace_back(new CSword);
 			break;
 		case 11:
-			deck.push_back(new CArmour);
+			deck.emplace_back(new CArmour);
 			break;
 		default: //generic card -- should not be used, just in case.
-			deck.push_back(new CCard);
+			deck.emplace_back(new CCard);
 			break;
 		}
 
@@ -104,8 +102,10 @@ void CPlayer::assignFromFile(std::string filename)
 		deck[count]->setType(std::stoi(type));
 		deck[count]->setName(name);
 		deck[count]->setAttack(std::stoi(attack));
-		deck[count]->setHealth(std::stoi(health));
-		deck[count]->setArmour(false);	//by default no minion should have armour
+		if (health != "") { deck[count]->setHealth(std::stoi(health)); }	//catch cards with no defined health value (i.e. lightning)
+		else { deck[count]->setHealth(0); }									//assign the card 0 health
+		deck[count]->setArmour(false);										//by default no minion should have armour
+		deck[count]->setRemove(false);
 
 #if _DEBUG
 		std::cout
@@ -166,14 +166,16 @@ void CPlayer::setHealth(int v)
 }
 void CPlayer::setHandCard(int v)
 {
-	hand.push_back(deck[v]);
+	hand.push_back(std::move(deck[v]));
+	//remove card from hand
 	std::swap(deck[v], deck.back());
 	deck.pop_back();
-	mSize--;
+	mSize--;	//delete?
 }
 void CPlayer::setTableCard(int v)
 {
-	table.push_back(hand[v]);
+	table.push_back(std::move(hand[v]));
+	//remove card from hand
 	std::swap(hand[v], hand.back());
 	hand.pop_back();
 }

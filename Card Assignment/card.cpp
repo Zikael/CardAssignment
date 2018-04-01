@@ -7,6 +7,7 @@ CCard::CCard()
 }
 CCard::~CCard()
 {
+
 }
 
 //setters
@@ -30,6 +31,10 @@ void CCard::setArmour(bool b)
 {
 	mArmour = b;
 }
+void CCard::setRemove(bool b)
+{
+	mRemove = b;
+}
 
 //getters
 int CCard::getAttack()
@@ -51,4 +56,8 @@ int CCard::getType()
 bool CCard::getArmour()
 {
 	return mArmour;
+}
+bool CCard::getRemove()
+{
+	return mRemove;
 }

@@ -12,13 +12,16 @@ private:
 	//round counter
 	int mRound;
 	//max rounds (defined as 30)
-	int mMAX_ROUND;
+	int mRoundMax = 30;
+	//control main game loop
 	bool playing = true;
-
+	//seed
+	int seed;
+	//flags
 	const int gameDraw = 0;
 	const int gameWin = 1;
 	const int gameLose = 2;
-
+	const int error = -1;
 public:
 	CGame();
 	~CGame();

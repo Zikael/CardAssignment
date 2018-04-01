@@ -2,6 +2,7 @@
 #define _PLAYER_H
 
 #include <vector>
+#include <memory>
 #include "card.h"
 
 class CPlayer
@@ -9,15 +10,21 @@ class CPlayer
 private:
 	int mHealth;
 	int mSize;
+
 	//vector for cards in deck
-	std::vector<CCard*> deck;
+	//std::vector<CCard*> deck;
+	std::vector<std::unique_ptr<CCard>> deck;
+
 	//vector for cards in hand
-	std::vector<CCard*> hand;
+	//std::vector<CCard*> hand;
+	std::vector<std::unique_ptr<CCard>> hand;
+
 	//vector for table cards
-	std::vector<CCard*> table;
+	//std::vector<CCard*> table;
+	std::vector<std::unique_ptr<CCard>> table;
 public:
 	CPlayer();
-	~CPlayer();
+	virtual ~CPlayer();
 
 	//getters
 	int getHealth();

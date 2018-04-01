@@ -24,7 +24,7 @@ class CArmour : public CCard
 				return;
 			}
 		}
-		std::cout << "No targets for armour to be applied to!" << std::endl;
+		std::cout << "No target for armour to be applied to!" << std::endl;
 		//remove from deck
 		playerAttack->removeTableCard(index);
 	}
