@@ -12,6 +12,9 @@ class CFireball : public CCard
 	{
 		//print out all the card on enemies table & summoner
 		int cardNum = 0;
+
+		//deprecated code -- removed because player has no control.
+		/*
 		if (playerControl)
 		{
 			int i;
@@ -39,8 +42,11 @@ class CFireball : public CCard
 			std::cin.ignore();
 			std::cout << std::endl;
 		}
-		else { if (cardNum != 0) {cardNum = rand() % playerHit->getSizeOfTable(); } } //determine a card to hit for the AI
+		else { if (cardNum != 0) {cardNum = rand() % playerHit->getSizeOfTable(); } } 
+		*/
 
+		//determine a card to hit for the AI
+		cardNum = rand() % playerHit->getSizeOfTable();
 		if (cardNum == playerHit->getSizeOfTable())
 		{
 			//attack summoner

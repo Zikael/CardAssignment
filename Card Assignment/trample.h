@@ -58,8 +58,9 @@ class CTrample : public CCard
 			{
 				//hold the current leftover damage
 				int tmpDamage = leftoverDamage;
-				//set new leftoverdamage
-				leftoverDamage -= playerHit->getHealth();
+				//set new leftoverdamage, negative values cause the effect to keep attacking until everything is dead
+				leftoverDamage -= abs(playerHit->getHealth());
+				if (leftoverDamage < 0) { leftoverDamage = 0; }
 				//Attack player directly
 				playerHit->setHealth(playerHit->getHealth() - tmpDamage);
 				//display new health levels

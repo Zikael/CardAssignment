@@ -49,6 +49,8 @@ public:
 	inline void drawLine();
 	//select valid card function
 	int playCard();
+	//return a random value
+	int Random(const float n);
 };
 
 #endif

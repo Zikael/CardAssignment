@@ -106,7 +106,12 @@ void CGame::drawLine()
 	for (int i = 0; i < screenX; i++) { std::cout << "="; }
 	std::cout << std::endl;
 }
-
+int CGame::Random(const float n)
+{
+	//random function to generate a random value from 1..(n-1)
+	//modified to n-1 to work correctly with arrays beginning with 0
+	return static_cast<int>(static_cast<double> (rand()) / (RAND_MAX + 1) * (n + 1) - 1);
+}
 int CGame::MainLoop()
 {
 	//load the cards into the players decks
@@ -126,20 +131,27 @@ int CGame::MainLoop()
 
 	//TODO use provided random function
 	seed = getSeed();
-	if (seed != -1) { srand(seed); }
+	if (seed != -1) { srand(4); }
 	else { return error; }
 	
 
 	//Header
-	std::cout << "Michael Oliva | Firebrick" << std::endl << std::endl;
+	std::cout << "Michael Oliva | G20676646 | Firebrick" << std::endl << std::endl;
 
 	//draw Sorceress first card
-	sorceress->setHandCard(rand() % sorceress->getSizeOfDeck());
-	std::cout << "Sorceress begins with card: " << sorceress->getHandCard(0).getName() << std::endl;
+	sorceress->setHandCard(Random(sorceress->getSizeOfDeck()));
+	sorceress->setTableCard(0);
+	std::cout << "Sorceress begins with " << sorceress->getTableCard(0).getName() << std::endl;
 
 	//draw wizard first card
-	wizard->setHandCard(rand() % wizard->getSizeOfDeck());
-	std::cout << "Wizard begins with card: " << wizard->getHandCard(0).getName() << std::endl << std::endl;
+	wizard->setHandCard(Random(wizard->getSizeOfDeck()));
+	wizard->setTableCard(0);
+	std::cout << "Wizard begins with " << wizard->getTableCard(0).getName() << std::endl << std::endl;
+
+	//add card to hand 2 there is always 2 to choose from
+	sorceress->setHandCard(Random(sorceress->getSizeOfDeck()));
+	wizard->setHandCard(Random(wizard->getSizeOfDeck()));
+
 
 	//game loop
 	while (playing)
@@ -159,14 +171,14 @@ int CGame::MainLoop()
 		*/
 
 		//Add a random card to each players hand
-		sorceress->setHandCard(rand() % sorceress->getSizeOfDeck());
-		wizard->setHandCard(rand() % wizard->getSizeOfDeck());
+		sorceress->setHandCard(Random(sorceress->getSizeOfDeck()));
+		wizard->setHandCard(Random(wizard->getSizeOfDeck()));
 
 
 		std::cout << "Round " << mRound + 1 << std::endl;
 
 #ifdef _DEBUG
-		std::cout << std::endl << "Your hand: " << std::endl << std::endl;
+		std::cout << std::endl << "Wizard hand: " << std::endl << std::endl;
 		for (int i = 0; i < wizard->getSizeOfHand(); i++)
 		{
 			std::cout << "Card Number: "  << i << std::endl;
@@ -175,16 +187,25 @@ int CGame::MainLoop()
 			std::cout << "Card Attack:	" << wizard->getHandCard(i).getAttack() << std::endl;
 			std::cout << "Card Health:	" << wizard->getHandCard(i).getHealth() << std::endl << std::endl;
 		}
+		std::cout << std::endl << "Sorceress hand: " << std::endl << std::endl;
+		for (int i = 0; i < wizard->getSizeOfHand(); i++)
+		{
+			std::cout << "Card Number: " << i << std::endl;
+			std::cout << "Card Type:	" << displayType(sorceress->getHandCard(i).getType()) << " (" << sorceress->getHandCard(i).getType() << ")" << std::endl;
+			std::cout << "Card Name:	" << sorceress->getHandCard(i).getName() << std::endl;
+			std::cout << "Card Attack:	" << sorceress->getHandCard(i).getAttack() << std::endl;
+			std::cout << "Card Health:	" << sorceress->getHandCard(i).getHealth() << std::endl << std::endl;
+		}
 #endif
 
 		//TODO: play spell cards
 
 		//sorceress draws card to table
-		sorceress->setTableCard(rand() % sorceress->getSizeOfHand());
+		sorceress->setTableCard(Random(sorceress->getSizeOfHand()));
 		std::cout << "Sorceress draws " << sorceress->getTableCard(sorceress->getSizeOfTable()-1).getName() << std::endl;
 
 		//wizard draws a card to the table
-		wizard->setTableCard(rand() % wizard->getSizeOfHand());
+		wizard->setTableCard(Random(wizard->getSizeOfHand()));
 		std::cout << "Wizard draws " << wizard->getTableCard(wizard->getSizeOfTable()-1).getName() << std::endl;
 
 		// ** SORCERESS PLAY ** \\

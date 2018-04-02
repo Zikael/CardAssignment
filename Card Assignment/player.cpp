@@ -52,8 +52,19 @@ void CPlayer::assignFromFile(std::string filename)
 		std::getline(ss, type, ' ');
 		std::getline(ss, name, ' ');
 		std::getline(ss, attack, ' ');
-		std::getline(ss, health, '\n');
-
+		if (std::stoi(type) != 3)
+		{
+			//lightning does't have a specified health
+			std::getline(ss, health, '\n');
+		}
+		else
+		{
+			std::cout << "light" << std::endl;
+			//read to end of line and ignore the values
+			std::string ignore;
+			std::getline(ss, ignore, '\n');
+			health = "0";
+		}
 		//shouldn't be reached, possible bug if health is null
 		if (type == "") { return; }
 
