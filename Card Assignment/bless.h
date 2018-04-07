@@ -17,15 +17,22 @@ class CBless : public CCard
 			//enemy minions
 			int randCard = 0;
 			if (playerHit->GetSizeOfTable() != 0) { randCard = rand() % playerHit->GetSizeOfTable(); }
-			else 
-			{ 
+			else
+			{
 				std::cout << "No cards for Bless to attack." << std::endl;
 				return;
 			}
 			playerHit->GetTableCard(randCard).SetHealth(playerHit->GetTableCard(randCard).GetHealth() - playerAttack->GetHandCard(index).GetAttack());
 			if (playerHit->GetTableCard(randCard).GetArmour()) { playerHit->GetTableCard(randCard).SetHealth(playerHit->GetTableCard(randCard).GetHealth() + 1); }
-			std::cout << playerAttack->GetHandCard(index).GetName() << " attacks " << playerHit->GetTableCard(randCard).GetName() << ". "
-				<< playerHit->GetTableCard(randCard).GetName() << "'s health is now " << playerHit->GetTableCard(randCard).GetHealth() << std::endl;
+			std::cout << playerAttack->GetHandCard(index).GetName() << " attacks " << playerHit->GetTableCard(randCard).GetName() << ". ";
+			if (playerHit->GetTableCard(randCard).GetHealth() <= 0)
+			{
+				//Display which card is killed
+				std::cout << playerHit->GetTableCard(randCard).GetName() << " killed." << std::endl;
+				//REMOVE CARD FROM DECK
+				playerHit->RemoveTableCard(randCard);
+			}
+			else { std::cout << playerHit->GetTableCard(randCard).GetName() << "'s health is now " << playerHit->GetTableCard(randCard).GetHealth() << std::endl; }
 		}
 		else if (randChoice == 1)
 		{
