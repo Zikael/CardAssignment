@@ -13,13 +13,13 @@ CGame::CGame()
 	mpSorceress->AssignFromFile("..\\Debug\\sorceress.txt");
 	mpWizard->AssignFromFile("..\\Debug\\wizard.txt");
 #else
-	mpSorceress->AssignFromFile("..\\Release\\sorceress.txt");
-	mpWizard->AssignFromFile("..\\Release\\wizard.txt");
+	mpSorceress->AssignFromFile("sorceress.txt");
+	mpWizard->AssignFromFile("wizard.txt");
 #endif
 
 	//get the mSeed
 	mSeed = GetSeed();
-	if (mSeed != -1) { srand(95830944233409); }
+	if (mSeed != -1) { srand(mSeed); }
 	else { std::cerr << "Seed not found!"; }
 }
 CGame::~CGame()
@@ -44,7 +44,7 @@ int CGame::GetSeed()
 #ifdef _DEBUG
 	std::ifstream file("..\\Debug\\seed.txt");
 #else
-	std::ifstream file("..\\Release\\seed.txt");
+	std::ifstream file("seed.txt");
 #endif
 	std::string line;
 	if (!file)
@@ -152,9 +152,13 @@ int CGame::ControlPlayers(CPlayer*& pPlayerAttack, CPlayer*& pPlayerHit, bool pl
 		//activate cards
 		for (int i = 0; i < pPlayerAttack->GetSizeOfTable(); ++i)
 		{
-			pPlayerAttack->GetTableCard(i).Play(pPlayerAttack, pPlayerHit, i, false);
+			pPlayerAttack->GetTableCard(i).Play(pPlayerAttack, pPlayerHit, i, playerControl);
 			//check return condition for a win
-			if (pPlayerHit->GetHealth() <= 0) { return mGameLose; }
+			if (pPlayerHit->GetHealth() <= 0)
+			{ 
+				if (playerControl) { return mGameWin; }
+				else { return mGameLose; }
+			}
 		}
 	}
 	else 

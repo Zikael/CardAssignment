@@ -1,17 +1,16 @@
-﻿  Card Assignment.cpp
+﻿  stdafx.cpp
+  Card Assignment.cpp
+  card.cpp
   game.cpp
-c:\users\zikael\source\repos\card assignment\card assignment\game.cpp(22): warning C4305: 'argument': truncation from '__int64' to 'unsigned int'
-c:\users\zikael\source\repos\card assignment\card assignment\game.cpp(22): warning C4309: 'argument': truncation of constant value
 c:\users\zikael\source\repos\card assignment\card assignment\game.cpp(118): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
 c:\users\zikael\source\repos\card assignment\card assignment\game.cpp(124): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
-c:\users\zikael\source\repos\card assignment\card assignment\game.cpp(189): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
-c:\users\zikael\source\repos\card assignment\card assignment\game.cpp(191): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
-c:\users\zikael\source\repos\card assignment\card assignment\game.cpp(200): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
-c:\users\zikael\source\repos\card assignment\card assignment\game.cpp(205): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
+c:\users\zikael\source\repos\card assignment\card assignment\game.cpp(193): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
+c:\users\zikael\source\repos\card assignment\card assignment\game.cpp(195): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
+c:\users\zikael\source\repos\card assignment\card assignment\game.cpp(204): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
+c:\users\zikael\source\repos\card assignment\card assignment\game.cpp(209): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
   player.cpp
   Generating code
-  2 of 409 functions ( 0.5%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    25 functions had inline decision re-evaluated but remain unchanged
+c:\users\zikael\source\repos\card assignment\card assignment\game.cpp(263): warning C4715: 'CGame::MainLoop': not all control paths return a value
+  All 409 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Finished generating code
   Card Assignment.vcxproj -> C:\Users\Zikael\source\repos\Card Assignment\Release\Card Assignment.exe

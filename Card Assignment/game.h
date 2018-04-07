@@ -36,8 +36,6 @@ public:
 	void GameManager();					//manager for the logic loop, handles win/lose/draw
 	int MainLoop();						//Game logic loop
 	std::string DisplayType(int v);		//display type
-	void PressToContinue();				//delay before next round starts
-	inline void DrawLine();				//draw a line between rounds to help stand out
 	int Random(const float n);			//return a random value
 };
 

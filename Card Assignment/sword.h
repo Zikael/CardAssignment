@@ -27,8 +27,8 @@ class CSword : public CCard
 		//assume no minion card found
 		//increase player health by 2
 		playerAttack->SetHealth(playerAttack->GetHealth() + 2);
-		if (playerControl) { std::cout << "Sword has increased the health of the Sorceress. Sorceress' health is now " << playerHit->GetHealth() << std::endl; }
-		else { std::cout << "Sword has increased the health of the Wizard. Wizard's health is now " << playerHit->GetHealth() << std::endl; }
+		if (playerControl) { std::cout << "Sword has increased the health of the Wizard. Wizard's health is now " << playerAttack->GetHealth() << std::endl; }
+		else { std::cout << "Sword has increased the health of the Sorceress. Sorceress' health is now " << playerAttack->GetHealth() << std::endl; }
 		//remove from mHand
 		playerAttack->RemoveHandCard(index);
 	}

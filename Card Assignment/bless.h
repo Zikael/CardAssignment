@@ -30,6 +30,7 @@ class CBless : public CCard
 		else if (randChoice == 1)
 		{
 			//enemy player
+			playerHit->SetHealth(playerHit->GetHealth() - playerAttack->GetHandCard(index).GetAttack());
 			if (playerControl) { std::cout << playerAttack->GetHandCard(index).GetName() << " attacks Sorceress. Sorceress' health is now " << playerHit->GetHealth() << std::endl; }
 			else { std::cout << playerAttack->GetHandCard(index).GetName() << " attacks Wizard. Wizard's health is now " << playerHit->GetHealth() << std::endl; }
 		}

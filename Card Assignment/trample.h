@@ -36,20 +36,19 @@ class CTrample : public CCard
 				//hold the current leftover damage
 				int tmpDamage = leftoverDamage;
 				//set new leftoverdamage
-				leftoverDamage -= playerHit->GetTableCard(randCard).GetHealth();
+				leftoverDamage -= abs(playerHit->GetTableCard(randCard).GetHealth());
 				//set the health of the attacked card
-				playerHit->GetTableCard(randCard).SetHealth(playerHit->GetTableCard(randCard).GetHealth() - tmpDamage);
+				playerHit->GetTableCard(randCard).SetHealth(playerHit->GetTableCard(randCard).GetHealth() - abs(tmpDamage));
 				std::cout << playerAttack->GetTableCard(index).GetName() << " attacks " << playerHit->GetTableCard(randCard).GetName() << ". ";
 				if (playerHit->GetTableCard(randCard).GetArmour()) { playerHit->GetTableCard(randCard).SetHealth(playerHit->GetTableCard(randCard).GetHealth() + 1); }
 				if (playerHit->GetTableCard(randCard).GetHealth() <= 0)
 				{
 					//Display which card is killed
 					std::cout << playerHit->GetTableCard(randCard).GetName() << " killed." << std::endl;
-					//REMOVE CARD FROM DECK
+					//REMOVE CARD FROM TABLE
 					playerHit->RemoveTableCard(randCard);
 				}
 				else { std::cout << playerHit->GetTableCard(randCard).GetName() << "'s health is now " << playerHit->GetTableCard(randCard).GetHealth() << std::endl; }
-
 			}
 			else
 			{
