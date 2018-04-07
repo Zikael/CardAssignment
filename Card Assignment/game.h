@@ -32,6 +32,7 @@ public:
 
 	//functions
 	int ControlPlayers(CPlayer*& pPlayerAttack, CPlayer*& pPlayerHit, bool playerControl);
+	inline bool IsMinion(int i);				//check if the card is a minino -- used to see if it can be place on the table
 	void GameManager();					//manager for the logic loop, handles win/lose/draw
 	int MainLoop();						//Game logic loop
 	std::string DisplayType(int v);		//display type

@@ -19,8 +19,8 @@ class CArmour : public CCard
 				//if a minion is found, set armour flag to true
 				playerAttack->GetTableCard(i).SetArmour(true);
 				std::cout << "Armour has been given to " << playerAttack->GetTableCard(i).GetName() << "." << std::endl;
-				//remove from mDeck
-				playerAttack->RemoveTableCard(index);
+				//remove from mHand
+				playerAttack->RemoveHandCard(index);
 				return;
 			}
 		}

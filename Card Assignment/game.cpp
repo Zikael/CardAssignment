@@ -19,7 +19,7 @@ CGame::CGame()
 
 	//get the mSeed
 	mSeed = GetSeed();
-	if (mSeed != -1) { srand(mSeed); }
+	if (mSeed != -1) { srand(95830944233409); }
 	else { std::cerr << "Seed not found!"; }
 }
 CGame::~CGame()
@@ -104,6 +104,14 @@ int CGame::Random(const float n)
 	//modified to n-1 to work correctly with arrays beginning with 0
 	return static_cast<int>(static_cast<double> (rand()) / (RAND_MAX + 1) * (n + 1) - 1);
 }
+inline bool CGame::IsMinion(int type)
+{
+	//check if the card type is either a spell/equipment, if so, return false
+	if (type == 2 || type == 3 || type == 4 || type == 10 || type == 11)
+		return false;
+	else
+		return true;
+}
 int CGame::ControlPlayers(CPlayer*& pPlayerAttack, CPlayer*& pPlayerHit, bool playerControl)
 {
 	//pPlayerAttack draws card to mTable
@@ -115,12 +123,7 @@ int CGame::ControlPlayers(CPlayer*& pPlayerAttack, CPlayer*& pPlayerHit, bool pl
 
 	mDrawnCard = Random(pPlayerAttack->GetSizeOfHand());
 	//check if the drawn card is a spell card
-	if (pPlayerAttack->GetHandCard(mDrawnCard).GetType() == 2 ||
-		pPlayerAttack->GetHandCard(mDrawnCard).GetType() == 3 ||
-		pPlayerAttack->GetHandCard(mDrawnCard).GetType() == 4 ||
-		//check is sword or armour
-		pPlayerAttack->GetHandCard(mDrawnCard).GetType() == 10 ||
-		pPlayerAttack->GetHandCard(mDrawnCard).GetType() == 11)
+	if (!IsMinion(pPlayerAttack->GetHandCard(mDrawnCard).GetType()))
 	{
 		//if so, play the card
 		if (playerControl) std::cout << "Wizard plays ";

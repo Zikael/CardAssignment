@@ -19,8 +19,8 @@ class CSword : public CCard
 				//if a minion is found, increase it's attack by 2
 				playerAttack->GetTableCard(i).SetAttack(playerAttack->GetTableCard(i).GetAttack() + 2);
 				std::cout << "Sword has increased " << playerAttack->GetTableCard(i).GetName() << "'s attack by 2." << std::endl;
-				//remove from mDeck
-				playerAttack->RemoveTableCard(index);
+				//remove from mHand
+				playerAttack->RemoveHandCard(index);
 				return;
 			}
 		}

@@ -117,11 +117,11 @@ void CPlayer::AssignFromFile(std::string filename)
 
 #if _DEBUG
 		std::cout
-			<< "I: " << count << " "
-			<< "T: " << mDeck[count]->GetType() << "	"
-			<< "N: " << mDeck[count]->GetName() << "	"
-			<< "A: " << mDeck[count]->GetAttack() << "	"
-			<< "H: " << mDeck[count]->GetHealth() << "	"
+			<< "I: " << mDeck.size() << " "
+			<< "T: " << mDeck[mDeck.size() - 1]->GetType() << "	"
+			<< "N: " << mDeck[mDeck.size() - 1]->GetName() << "	"
+			<< "A: " << mDeck[mDeck.size() - 1]->GetAttack() << "	"
+			<< "H: " << mDeck[mDeck.size() - 1]->GetHealth() << "	"
 			<< std::endl;
 #endif
 	}

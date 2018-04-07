@@ -12,40 +12,7 @@ class CFireball : public CCard
 	{
 		//print out all the card on enemies mTable & summoner
 		int cardNum = 0;
-
-		//deprecated code -- removed because player has no control.
-		/*
-		if (playerControl)
-		{
-			int i;
-			for (i = 0; i < playerHit->getSizeOfTable(); ++i)
-			{
-				std::cout << i << ": " << playerHit->GetTableCard(i).getName() << " (" << playerHit->GetTableCard(i).getHealth() << " hp)." << std::endl;
-			}
-			std::cout << i << ": Summoner." << std::endl;
-
-			//validate input
-			bool validInput = false;
-			while (!validInput)
-			{
-				std::cout << "Choose target for " << playerAttack->GetHandCard(index).getName() << " to attack: ";
-				std::cin >> cardNum;
-				if (cardNum >= 0 && cardNum <= i) { validInput = true; }
-				else
-				{
-					std::cin.clear();
-					std::cin.ignore();
-					std::cout << std::endl << "Please select a card number between 0 and " << i << "." << std::endl;
-				}
-			}
-			std::cin.clear();
-			std::cin.ignore();
-			std::cout << std::endl;
-		}
-		else { if (cardNum != 0) {cardNum = rand() % playerHit->getSizeOfTable(); } } 
-		*/
-
-		//determine a card to hit for the AI
+		//determine a card to hit
 		if (playerHit->GetSizeOfTable() != 0) { cardNum = rand() % playerHit->GetSizeOfTable(); }
 		if (cardNum == playerHit->GetSizeOfTable())
 		{

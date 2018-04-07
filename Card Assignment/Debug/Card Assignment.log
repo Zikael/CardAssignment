@@ -1,12 +1,2 @@
-﻿  game.cpp
-c:\users\zikael\source\repos\card assignment\card assignment\game.cpp(97): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
-c:\users\zikael\source\repos\card assignment\card assignment\game.cpp(103): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
-c:\users\zikael\source\repos\card assignment\card assignment\game.cpp(182): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
-c:\users\zikael\source\repos\card assignment\card assignment\game.cpp(184): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
-c:\users\zikael\source\repos\card assignment\card assignment\game.cpp(193): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
-c:\users\zikael\source\repos\card assignment\card assignment\game.cpp(198): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
-  player.cpp
-  Generating Code...
-c:\users\zikael\source\repos\card assignment\card assignment\game.cpp(149): warning C4715: 'CGame::ControlPlayers': not all control paths return a value
-c:\users\zikael\source\repos\card assignment\card assignment\game.cpp(252): warning C4715: 'CGame::MainLoop': not all control paths return a value
+﻿  Card Assignment.cpp
   Card Assignment.vcxproj -> C:\Users\Zikael\source\repos\Card Assignment\Debug\Card Assignment.exe
