@@ -11,53 +11,53 @@ CCard::~CCard()
 }
 
 //setters
-void CCard::setAttack(int v)
+void CCard::SetAttack(int v)
 {
 	mAttack = v;
 }
-void CCard::setName(std::string v)
+void CCard::SetName(std::string v)
 {
 	mName = v;
 }
-void CCard::setHealth(int v)
+void CCard::SetHealth(int v)
 {
 	mHealth = v;
 }
-void CCard::setType(int v)
+void CCard::SetType(int v)
 {
 	mType = v;
 }
-void CCard::setArmour(bool b)
+void CCard::SetArmour(bool b)
 {
 	mArmour = b;
 }
-void CCard::setRemove(bool b)
+void CCard::SetRemove(bool b)
 {
 	mRemove = b;
 }
 
 //getters
-int CCard::getAttack()
+int CCard::GetAttack()
 {
 	return mAttack;
 }
-std::string CCard::getName()
+std::string CCard::GetName()
 {
 	return mName;
 }
-int CCard::getHealth()
+int CCard::GetHealth()
 {
 	return mHealth;
 }
-int CCard::getType()
+int CCard::GetType()
 {
 	return mType;
 }
-bool CCard::getArmour()
+bool CCard::GetArmour()
 {
 	return mArmour;
 }
-bool CCard::getRemove()
+bool CCard::GetRemove()
 {
 	return mRemove;
 }

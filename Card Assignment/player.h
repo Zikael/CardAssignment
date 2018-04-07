@@ -8,43 +8,33 @@
 class CPlayer
 {
 private:
-	int mHealth;
-	int mSize;
-
-	//vector for cards in deck
-	//std::vector<CCard*> deck;
-	std::vector<std::unique_ptr<CCard>> deck;
-
-	//vector for cards in hand
-	//std::vector<CCard*> hand;
-	std::vector<std::unique_ptr<CCard>> hand;
-
-	//vector for table cards
-	//std::vector<CCard*> table;
-	std::vector<std::unique_ptr<CCard>> table;
+	int mHealth;	//Health of the player
+	std::vector<std::unique_ptr<CCard>> mDeck;	//vector for cards in mDeck
+	std::vector<std::unique_ptr<CCard>> mHand;	//vector for cards in mHand
+	std::vector<std::unique_ptr<CCard>> mTable;	//vector for mTable cards
 public:
 	CPlayer();
 	virtual ~CPlayer();
 
 	//getters
-	int getHealth();
-	int getSizeOfDeck();
-	int getSizeOfHand();
-	int getSizeOfTable();
-	CCard& getDeckCard(int v);
-	CCard& getHandCard(int v);
-	CCard& getTableCard(int v);
+	int GetHealth();				//returns the players health
+	int GetSizeOfDeck();			//returns the size of the mDeck vector
+	int GetSizeOfHand();			//returns the size of the mHand vector
+	int GetSizeOfTable();			//returns the size of the tabke vector
+	CCard& GetDeckCard(int v);		//returns a card in the mDeck vector at position v
+	CCard& GetHandCard(int v);		//returns a card in the mHand vector at position v
+	CCard& GetTableCard(int v);		//returns a card in the mTable vector at position v
 
 	//setters
-	void setHealth(int v);
-	void setHandCard(int v);
-	void setTableCard(int v);
+	void SetHealth(int v);			//set a new value for the players health
+	void SetHandCard(int v);		//give a new mHand card from the mDeck vector
+	void SetTableCard(int v);		//give a new mTable card from the mHand vector
 
 	//functions
-	//assign cards from file
-	void assignFromFile(std::string filepath);
-	//remove card item from vector
-	void removeTableCard(int v);
+	void AssignFromFile(std::string filepath);	//Read the cards in from the file and assign to the mDeck vecotr
+	void RemoveTableCard(int v);				//remove card item from vector
+	void RemoveHandCard(int v);					//remove card item from hand vector (used in spells)
+	void ShuffleDeck(int randCard);				//shuffle the mDeck
 };
 
 #endif

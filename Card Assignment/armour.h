@@ -8,25 +8,25 @@
 
 class CArmour : public CCard
 {
-	void play(CPlayer*& playerAttack, CPlayer*& playerHit, int index, bool playerControl)
+	void Play(CPlayer*& playerAttack, CPlayer*& playerHit, int index, bool playerControl)
 	{
 		int minionType = 1;
-		//look for a minion on the table
-		for (int i = 0; i < playerAttack->getSizeOfTable(); ++i)
+		//look for a minion on the mTable
+		for (int i = 0; i < playerAttack->GetSizeOfTable(); ++i)
 		{
-			if (playerAttack->getTableCard(i).getType() == minionType)
+			if (playerAttack->GetTableCard(i).GetType() == minionType)
 			{
 				//if a minion is found, set armour flag to true
-				playerAttack->getTableCard(i).setArmour(true);
-				std::cout << "Armour has been given to " << playerAttack->getTableCard(i).getName() << "." << std::endl;
-				//remove from deck
-				playerAttack->removeTableCard(index);
+				playerAttack->GetTableCard(i).SetArmour(true);
+				std::cout << "Armour has been given to " << playerAttack->GetTableCard(i).GetName() << "." << std::endl;
+				//remove from mDeck
+				playerAttack->RemoveTableCard(index);
 				return;
 			}
 		}
 		std::cout << "No target for armour to be applied to!" << std::endl;
-		//remove from deck
-		playerAttack->removeTableCard(index);
+		//remove from mHand
+		playerAttack->RemoveHandCard(index);
 	}
 };
 #endif

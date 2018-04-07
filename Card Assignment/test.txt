@@ -1,0 +1,272 @@
+Michael Oliva | G20676646 | Firebrick
+
+
+Sorceress begins with Wall
+Wizard begins with Orc
+
+Round 1
+Sorceress draws Dwarf
+Sorceress plays Wall
+Card(s) on table: Wall(5) 
+
+Wizard draws Fireball
+Wizard plays Orc
+Card(s) on table: Orc(2) 
+Orc attacks Wall. Wall's health is now 3
+
+
+Round 2
+Sorceress draws Fireball
+Sorceress plays Dwarf
+Card(s) on table: Wall(3) Dwarf(4) 
+Dwarf attacks Orc. Orc killed.
+
+Wizard draws Orc
+Wizard plays Fireball
+Fireball attacks Dwarf. Dwarf's health is now 1
+Card(s) on table: 
+Wizard has no cards to play!
+
+
+Round 3
+Sorceress draws Swordswinger
+Sorceress plays Swordswinger
+Card(s) on table: Wall(3) Dwarf(1) Swordswinger(2) 
+Dwarf attacks Wizard. Wizard's health is now 28
+Swordswinger attacks Wizard. Wizard's health is now 26
+
+Wizard draws Leech
+Wizard plays Orc
+Card(s) on table: Orc(2) 
+Orc attacks Dwarf. Dwarf killed.
+
+
+Round 4
+Sorceress draws Spearcarrier
+Sorceress plays Fireball
+Fireball attacks Orc. Orc killed.
+Card(s) on table: Wall(3) Swordswinger(2) 
+Swordswinger attacks Wizard. Wizard's health is now 24
+
+Wizard draws Rat
+Wizard plays Leech
+Card(s) on table: Leech(2) 
+Leech attacks Wall. Wall's health is now 1
+
+
+Round 5
+Sorceress draws Sword
+Sorceress plays Sword
+Card(s) on table: Wall(1) Swordswinger(2) Sword(4) 
+Swordswinger attacks Leech. Leech killed.
+Sword has increased Swordswinger's attack by 2.
+
+Wizard draws Pooka
+Wizard plays Rat
+Card(s) on table: Rat(2) 
+Rat attacks Wall. Wall killed.
+
+
+Round 6
+Sorceress draws Elf
+Sorceress plays Spearcarrier
+Card(s) on table: Swordswinger(2) Spearcarrier(1) 
+Swordswinger attacks Rat. Rat killed.
+Spearcarrier attacks Wizard. Wizard's health is now 24
+
+Wizard draws Pooka
+Wizard plays Pooka
+Card(s) on table: Pooka(4) 
+Pooka attacks Spearcarrier. Spearcarrier killed.
+
+
+Round 7
+Sorceress draws Swordswinger
+Sorceress plays Elf
+Card(s) on table: Swordswinger(2) Elf(4) 
+Swordswinger attacks Pooka. Pooka killed.
+Elf attacks Wizard. Wizard's health is now 23
+
+Wizard draws Lightning
+Wizard plays Pooka
+Card(s) on table: Pooka(4) 
+Pooka attacks Swordswinger. Swordswinger killed.
+
+
+Round 8
+Sorceress draws Swordswinger
+Sorceress plays Swordswinger
+Card(s) on table: Elf(4) Swordswinger(2) 
+Elf attacks Pooka. Pooka's health is now 3
+Swordswinger attacks Pooka. Pooka's health is now 1
+
+Wizard draws Orc
+Wizard plays Lightning
+Lightning attacks Elf. Elf's health is now 3
+Lightning attacks Swordswinger. Swordswinger's health is now 1
+Lightning attacks Sorceress. Sorceress' health is now 29
+Card(s) on table: Pooka(1) 
+Pooka attacks Swordswinger. Swordswinger killed.
+
+
+Round 9
+Sorceress draws Dwarf
+Sorceress plays Swordswinger
+Card(s) on table: Elf(3) Swordswinger(2) 
+Elf attacks Pooka. Pooka killed.
+Swordswinger attacks Wizard. Wizard's health is now 21
+
+Wizard draws Vampire
+Wizard plays Vampire
+Card(s) on table: Vampire(3) 
+Vampire attacks Swordswinger. Swordswinger killed.
+
+
+Round 10
+Sorceress draws Armour
+Sorceress plays Armour
+Card(s) on table: Elf(3) Armour(4) 
+Elf attacks Vampire. Vampire's health is now 3
+Armour has been given to Elf.
+
+Wizard draws Fireball
+Wizard plays Orc
+Card(s) on table: Vampire(3) Orc(2) 
+Vampire attacks Elf. Elf's health is now 2
+Orc attacks Elf. Elf's health is now 1
+
+
+Round 11
+Sorceress draws Spearcarrier
+Sorceress plays Spearcarrier
+Card(s) on table: Elf(1) Spearcarrier(1) 
+Elf attacks Orc. Orc's health is now 1
+Spearcarrier attacks Orc. Orc killed.
+
+Wizard draws Orc
+Wizard plays Fireball
+Fireball attacks Spearcarrier. Spearcarrier killed.
+Card(s) on table: Vampire(4) 
+Vampire attacks Elf. Elf killed.
+
+
+Round 12
+Sorceress draws Swordswinger
+Sorceress plays Dwarf
+Card(s) on table: Dwarf(4) 
+Dwarf attacks Vampire. Vampire's health is now 3
+
+Wizard draws Rat
+Wizard plays Orc
+Card(s) on table: Vampire(3) Orc(2) 
+Vampire attacks Dwarf. Dwarf's health is now 2
+Orc attacks Dwarf. Dwarf killed.
+
+
+Round 13
+Sorceress draws Elephant
+Sorceress plays Elephant
+Card(s) on table: Elephant(4) 
+Elephant attacks Orc. Orc killed.
+Elephant attacks Vampire. Vampire's health is now 2
+
+Wizard draws Goblin
+Wizard plays Rat
+Card(s) on table: Vampire(2) Rat(2) 
+Vampire attacks Elephant. Elephant's health is now 2
+Rat attacks Elephant. Elephant's health is now 1
+
+
+Round 14
+Sorceress draws Bless
+Sorceress plays Bless
+Bless heals Sorceress. Sorceress' health is now 31
+Card(s) on table: Elephant(1) 
+Elephant attacks Vampire. Vampire killed.
+Elephant attacks Rat. Rat's health is now 1
+
+Wizard draws Vampire
+Wizard plays Goblin
+Card(s) on table: Rat(1) Goblin(1) 
+Rat attacks Elephant. Elephant killed.
+Goblin attacks Sorceress. Sorceress' health is now 29
+
+
+Round 15
+Sorceress draws Wall
+Sorceress plays Wall
+Card(s) on table: Wall(5) 
+
+Wizard draws Dragon
+Wizard plays Dragon
+Card(s) on table: Rat(1) Goblin(1) Dragon(4) 
+Rat attacks Wall. Wall's health is now 4
+Goblin attacks Wall. Wall's health is now 2
+Dragon attacks Wall. Wall killed.
+Dragon attacks Sorceress. Sorceress' health is now 27
+
+
+Round 16
+Sorceress draws Swordswinger
+Sorceress plays Swordswinger
+Card(s) on table: Swordswinger(2) 
+Swordswinger attacks Goblin. Goblin killed.
+
+Wizard draws Orc
+Wizard plays Vampire
+Card(s) on table: Rat(1) Dragon(4) Vampire(3) 
+Rat attacks Swordswinger. Swordswinger's health is now 1
+Dragon attacks Swordswinger. Swordswinger killed.
+Dragon attacks Sorceress. Sorceress' health is now 24
+Vampire attacks Sorceress. Sorceress' health is now 22
+
+
+Round 17
+Sorceress draws Spearcarrier
+Sorceress plays Swordswinger
+Card(s) on table: Swordswinger(2) 
+Swordswinger attacks Vampire. Vampire's health is now 2
+
+Wizard draws Dragon
+Wizard plays Orc
+Card(s) on table: Rat(1) Dragon(4) Vampire(2) Orc(2) 
+Rat attacks Swordswinger. Swordswinger's health is now 1
+Dragon attacks Swordswinger. Swordswinger killed.
+Dragon attacks Sorceress. Sorceress' health is now 19
+Vampire attacks Sorceress. Sorceress' health is now 17
+Orc attacks Sorceress. Sorceress' health is now 15
+
+
+Round 18
+Sorceress draws Elephant
+Sorceress plays Spearcarrier
+Card(s) on table: Spearcarrier(1) 
+Spearcarrier attacks Rat. Rat killed.
+
+Wizard draws Pooka
+Wizard plays Pooka
+Card(s) on table: Orc(2) Dragon(4) Vampire(3) Pooka(4) 
+Orc attacks Spearcarrier. Spearcarrier killed.
+Dragon attacks Sorceress. Sorceress' health is now 11
+Vampire attacks Sorceress. Sorceress' health is now 9
+Pooka attacks Sorceress. Sorceress' health is now 7
+
+
+Round 19
+Sorceress draws Swordsman
+Sorceress plays Swordsman
+Card(s) on table: Swordsman(2) 
+Swordsman attacks Dragon. Dragon's health is now 2
+
+Wizard draws Giant
+Wizard plays Giant
+Card(s) on table: Orc(2) Dragon(2) Vampire(4) Pooka(4) Giant(4) 
+Orc attacks Swordsman. Swordsman killed.
+Dragon attacks Sorceress. Sorceress' health is now 3
+Vampire attacks Sorceress. Sorceress' health is now 1
+Pooka attacks Sorceress. Sorceress' health is now -1
+
+
+
+
+The Sorceress has been killed!

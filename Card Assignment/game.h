@@ -7,50 +7,37 @@ class CGame
 {
 private:
 	//pointers for players
-	CPlayer* wizard = new CPlayer;
-	CPlayer* sorceress = new CPlayer;
-	//round counter
-	int mRound;
-	//max rounds (defined as 30)
-	int mRoundMax = 30;
-	//control main game loop
-	bool playing = true;
-	//seed
-	int seed;
-	//flags
-	const int gameDraw = 0;
-	const int gameWin = 1;
-	const int gameLose = 2;
-	const int error = -1;
+	CPlayer* mpWizard = new CPlayer;
+	CPlayer* mpSorceress = new CPlayer;
+
+	int mRound;					//round counter
+	const int ROUND_MAX = 30;	//max rounds (defined as 30)
+	bool mPlaying = true;		//control main game loop
+	int mSeed;					//mSeed for random function
+	int mDrawnCard;				//card number that has been randomly drawn
+
+	//flags to check the state of the game
+	int mGameState;
+	const int mGamePlay = 10;	//keep playing
+	const int mGameDraw = 0;	//both alive after 30 rounds
+	const int mGameWin = 1;		//wizard wins
+	const int mGameLose = 2;	//sorceress wins
+	const int mError = -1;		//internal error
 public:
-	CGame();
+	CGame();					
 	~CGame();
 
-	//setters
-	//set number of rounds
-	void setRounds(int v);
-
 	//getters
+	int GetSeed();						//returns a mSeed from the file
 
-	//returns a seed from the file
-	int getSeed();
-	//return number of rounds
-	int getRounds();
-
-	//manager for the logic loop, handles win/lose/draw
-	void gameManager();
-	//Game logic loop
-	int MainLoop();
-	//display type
-	std::string displayType(int v);
-	//delay before enxt round starts
-	void pressToContinue();
-	//draw a line between rounds to help stand out
-	inline void drawLine();
-	//select valid card function
-	int playCard();
-	//return a random value
-	int Random(const float n);
+	//functions
+	int ControlPlayers(CPlayer*& pPlayerAttack, CPlayer*& pPlayerHit, bool playerControl);
+	void GameManager();					//manager for the logic loop, handles win/lose/draw
+	int MainLoop();						//Game logic loop
+	std::string DisplayType(int v);		//display type
+	void PressToContinue();				//delay before next round starts
+	inline void DrawLine();				//draw a line between rounds to help stand out
+	int Random(const float n);			//return a random value
 };
 
 #endif

@@ -1,8 +1,16 @@
-﻿  player.cpp
+﻿  Card Assignment.cpp
+  card.cpp
+  game.cpp
+c:\users\zikael\source\repos\card assignment\card assignment\game.cpp(110): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
+c:\users\zikael\source\repos\card assignment\card assignment\game.cpp(116): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
+c:\users\zikael\source\repos\card assignment\card assignment\game.cpp(186): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
+c:\users\zikael\source\repos\card assignment\card assignment\game.cpp(188): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
+c:\users\zikael\source\repos\card assignment\card assignment\game.cpp(197): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
+c:\users\zikael\source\repos\card assignment\card assignment\game.cpp(202): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
+  player.cpp
   Generating code
-c:\users\zikael\source\repos\card assignment\card assignment\game.cpp(241): warning C4715: 'CGame::MainLoop': not all control paths return a value
-  3 of 406 functions ( 0.7%) were compiled, the rest were copied from previous compilation.
-    1 functions were new in current compilation
-    60 functions had inline decision re-evaluated but remain unchanged
+  0 of 408 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Card Assignment.vcxproj -> C:\Users\Zikael\source\repos\Card Assignment\Release\Card Assignment.exe

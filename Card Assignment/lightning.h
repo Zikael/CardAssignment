@@ -8,43 +8,43 @@
 
 class CLightning: public CCard
 {
-	void play(CPlayer*& playerAttack, CPlayer*& playerHit, int index, bool playerControl)
+	void Play(CPlayer*& playerAttack, CPlayer*& playerHit, int index, bool playerControl)
 	{
 		//lightning attacks all card + player by 1
-		if (playerHit->getSizeOfTable() > 0)
+		if (playerHit->GetSizeOfTable() > 0)
 		{
 			//TODO: fix non attacking player if previous one is killed.
-			for (int i = 0; i < playerHit->getSizeOfTable(); ++i)
+			for (int i = 0; i < playerHit->GetSizeOfTable(); ++i)
 			{
-				playerHit->getTableCard(i).setHealth(playerHit->getTableCard(i).getHealth() - playerAttack->getTableCard(index).getAttack());
-				std::cout << playerAttack->getTableCard(index).getName() << " attacks " << playerHit->getTableCard(i).getName() << ". ";
-				if (playerHit->getTableCard(i).getArmour()) { playerHit->getTableCard(i).setHealth(playerHit->getTableCard(i).getHealth() + 1); }
-				if (playerHit->getTableCard(i).getHealth() <= 0)
+				playerHit->GetTableCard(i).SetHealth(playerHit->GetTableCard(i).GetHealth() - playerAttack->GetHandCard(index).GetAttack());
+				std::cout << playerAttack->GetHandCard(index).GetName() << " attacks " << playerHit->GetTableCard(i).GetName() << ". ";
+				if (playerHit->GetTableCard(i).GetArmour()) { playerHit->GetTableCard(i).SetHealth(playerHit->GetTableCard(i).GetHealth() + 1); }
+				if (playerHit->GetTableCard(i).GetHealth() <= 0)
 				{
 					//Display which card is killed
-					std::cout << playerHit->getTableCard(i).getName() << " killed." << std::endl;
+					std::cout << playerHit->GetTableCard(i).GetName() << " killed." << std::endl;
 					//flag to remove
-					playerHit->getTableCard(i).setRemove(true);
+					playerHit->GetTableCard(i).SetRemove(true);
 				}
-				else { std::cout << playerHit->getTableCard(i).getName() << "'s health is now " << playerHit->getTableCard(i).getHealth() << std::endl; }
+				else { std::cout << playerHit->GetTableCard(i).GetName() << "'s health is now " << playerHit->GetTableCard(i).GetHealth() << std::endl; }
 			}
 		}
 		//Attack player directly
-		playerHit->setHealth(playerHit->getHealth() - playerAttack->getTableCard(index).getAttack());
+		playerHit->SetHealth(playerHit->GetHealth() - playerAttack->GetHandCard(index).GetAttack());
 		//display new health levels
-		if (playerControl) { std::cout << playerAttack->getTableCard(index).getName() << " attacks Sorceress. Sorceress' health is now " << playerHit->getHealth() << std::endl; }
-		else { std::cout << playerAttack->getTableCard(index).getName() << " attacks Wizard. Wizard's health is now " << playerHit->getHealth() << std::endl; }
-		for (int i = 0; i < playerHit->getSizeOfTable(); ++i)
+		if (playerControl) { std::cout << playerAttack->GetHandCard(index).GetName() << " attacks Sorceress. Sorceress' health is now " << playerHit->GetHealth() << std::endl; }
+		else { std::cout << playerAttack->GetHandCard(index).GetName() << " attacks Wizard. Wizard's health is now " << playerHit->GetHealth() << std::endl; }
+		for (int i = 0; i < playerHit->GetSizeOfTable(); ++i)
 		{
 			//REMOVE CARD FROM DECK
-			if (playerHit->getTableCard(i).getRemove()) 
+			if (playerHit->GetTableCard(i).GetRemove()) 
 			{
-				playerHit->removeTableCard(i); 
+				playerHit->RemoveTableCard(i); 
 				i = 0; //restart to loop.
 			}
 		}
-		//remove from deck
-		playerAttack->removeTableCard(index);
+		//remove from mHand
+		playerAttack->RemoveHandCard(index);
 	}
 };
 #endif

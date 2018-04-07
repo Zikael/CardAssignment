@@ -30,9 +30,6 @@
     <ClInclude Include="player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="smartPointer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="minion.h">
       <Filter>Header Files</Filter>
     </ClInclude>

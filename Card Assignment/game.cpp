@@ -8,34 +8,38 @@
 CGame::CGame()
 {
 	mRound = 0;
-	mRoundMax = 30;
+	//load the cards into the players decks
+#ifdef _DEBUG
+	mpSorceress->AssignFromFile("..\\Debug\\sorceress.txt");
+	mpWizard->AssignFromFile("..\\Debug\\wizard.txt");
+#else
+	mpSorceress->AssignFromFile("..\\Release\\sorceress.txt");
+	mpWizard->AssignFromFile("..\\Release\\wizard.txt");
+#endif
+
+	//get the mSeed
+	mSeed = GetSeed();
+	if (mSeed != -1) { srand(mSeed); }
+	else { std::cerr << "Seed not found!"; }
 }
 CGame::~CGame()
 {
 	//delete pointers
-	delete wizard;
-	delete sorceress;
+	delete mpWizard;
+	delete mpSorceress;
 }
 
-void CGame::gameManager()
+void CGame::GameManager()
 {
-	/*
-	const int gameDraw = 0;
-	const int gameWin = 1;
-	const int gameLose = 2;
-	*/
 	int gameResult = MainLoop();
-	drawLine();
-	for (int i = 0; i < 8; ++i) { std::cout << std::endl; }
-	if (gameResult == gameDraw) { std::cout << std::endl << "\t\t\t\tWell played! Game drawn!" << std::endl; }
-	if (gameResult == gameWin) { std::cout << std::endl << "\t\t\tSorceress Defeated!" << std::endl; }
-	if (gameResult == gameLose) { std::cout << std::endl << "\t\t\t\tWizard died!" << std::endl; }
-	if (gameResult == error) { std::cout << std::endl << "\t\t\tAn error has occured!" << std::endl; }
-	for (int i = 0; i < 10; ++i) { std::cout << std::endl; }
-	drawLine();
+	for (int i = 0; i < 3; ++i) { std::cout << std::endl; }
+	if (gameResult == mGameDraw) { std::cout << std::endl << "Well played! Game drawn!" << std::endl; }
+	if (gameResult == mGameWin) { std::cout << std::endl << "The Sorceress has been killed!" << std::endl; }
+	if (gameResult == mGameLose) { std::cout << std::endl << "The Wizard has been killed!" << std::endl; }
+	if (gameResult == mError) { std::cout << std::endl << "An error has occured!" << std::endl; }
 }
 
-int CGame::getSeed()
+int CGame::GetSeed()
 {
 #ifdef _DEBUG
 	std::ifstream file("..\\Debug\\seed.txt");
@@ -51,7 +55,7 @@ int CGame::getSeed()
 	std::getline(file, line);
 	return std::stoi(line);
 }
-std::string CGame::displayType(int v)
+std::string CGame::DisplayType(int v)
 {
 	//switch to return the name for every type of card
 	switch (v)
@@ -94,163 +98,158 @@ std::string CGame::displayType(int v)
 		break;
 	}
 }
-void CGame::pressToContinue()
-{
-	std::cout << std::endl << "End of round " << mRound + 1 << ". Press ENTER to play next round." << std::endl;
-	//wait for ENTER to be pressed
-	std::cin.get();
-}
-void CGame::drawLine()
-{
-	const int screenX = 80; //size os console window
-	for (int i = 0; i < screenX; i++) { std::cout << "="; }
-	std::cout << std::endl;
-}
 int CGame::Random(const float n)
 {
 	//random function to generate a random value from 1..(n-1)
 	//modified to n-1 to work correctly with arrays beginning with 0
 	return static_cast<int>(static_cast<double> (rand()) / (RAND_MAX + 1) * (n + 1) - 1);
 }
+int CGame::ControlPlayers(CPlayer*& pPlayerAttack, CPlayer*& pPlayerHit, bool playerControl)
+{
+	//pPlayerAttack draws card to mTable
+	pPlayerAttack->SetHandCard(Random(pPlayerAttack->GetSizeOfDeck()));
+
+	if (playerControl) std::cout << "Wizard ";
+	else { std::cout << "Sorceress "; }
+	std::cout << "draws " << pPlayerAttack->GetHandCard(pPlayerAttack->GetSizeOfHand() - 1).GetName() << std::endl;
+
+	mDrawnCard = Random(pPlayerAttack->GetSizeOfHand());
+	//check if the drawn card is a spell card
+	if (pPlayerAttack->GetHandCard(mDrawnCard).GetType() == 2 ||
+		pPlayerAttack->GetHandCard(mDrawnCard).GetType() == 3 ||
+		pPlayerAttack->GetHandCard(mDrawnCard).GetType() == 4 ||
+		//check is sword or armour
+		pPlayerAttack->GetHandCard(mDrawnCard).GetType() == 10 ||
+		pPlayerAttack->GetHandCard(mDrawnCard).GetType() == 11)
+	{
+		//if so, play the card
+		if (playerControl) std::cout << "Wizard plays ";
+		else { std::cout << "Sorceress plays "; }
+		std::cout << pPlayerAttack->GetHandCard(mDrawnCard).GetName() << std::endl;
+		pPlayerAttack->GetHandCard(mDrawnCard).Play(pPlayerAttack, pPlayerHit, mDrawnCard, playerControl);
+	}
+	else
+	{
+		//if not, add to the table
+		pPlayerAttack->SetTableCard(mDrawnCard);
+		if (playerControl) std::cout << "Wizard plays ";
+		else { std::cout << "Sorceress plays "; }
+		std::cout << pPlayerAttack->GetTableCard(pPlayerAttack->GetSizeOfTable() - 1).GetName() << std::endl;
+	}
+	//output cards on the table
+	std::cout << "Card(s) on table: ";
+	for (int i = 0; i < pPlayerAttack->GetSizeOfTable(); i++)
+	{
+		std::cout << pPlayerAttack->GetTableCard(i).GetName() << "(" << pPlayerAttack->GetTableCard(i).GetHealth() << ") ";
+	}
+	std::cout << std::endl;
+	//check if the player has cards on the table
+	if (pPlayerAttack->GetSizeOfTable() != 0)
+	{
+		//activate cards
+		for (int i = 0; i < pPlayerAttack->GetSizeOfTable(); ++i)
+		{
+			pPlayerAttack->GetTableCard(i).Play(pPlayerAttack, pPlayerHit, i, false);
+			//check return condition for a win
+			if (pPlayerHit->GetHealth() <= 0) { return mGameLose; }
+		}
+	}
+	else 
+	{ 
+		//output no cards to play
+		if (playerControl) std::cout << "Wizard has no cards to play!" << std::endl;
+		else { std::cout << "Sorcceress has no cards to play!" << std::endl; }
+	}
+	std::cout << std::endl;
+	//return keep playing state
+	return mGamePlay;
+}
 int CGame::MainLoop()
 {
-	//load the cards into the players decks
-#ifdef _DEBUG
-	sorceress->assignFromFile("..\\Debug\\sorceress.txt");
-	wizard->assignFromFile("..\\Debug\\wizard.txt");
-#else
-	sorceress->assignFromFile("..\\Release\\sorceress.txt");
-	wizard->assignFromFile("..\\Release\\wizard.txt");
-#endif
-	/*
-	The text outputted must use the following format :
-	<Name> <Program name>
-	Sorceress begins with <card name>
-	Wizard begins with <card name>
-	*/
-
-	//TODO use provided random function
-	seed = getSeed();
-	if (seed != -1) { srand(4); }
-	else { return error; }
-	
-
 	//Header
 	std::cout << "Michael Oliva | G20676646 | Firebrick" << std::endl << std::endl;
 
+	//Shuffle the mDeck option
+	
+	std::cout << "Would you like to shuffle the decks?[y/n] ";
+	char input = std::cin.get();
+	//clear the buffer after usse
+	std::cin.clear();
+	std::cin.ignore();
+	if (input == 'y') 
+	{
+		std::cout << "Shuffling cards!" << std::endl;
+		int randCard;
+		//generate a random number from 20 and 60
+		for (int i = 0; i < 20 + Random(41); ++i)
+		{
+			randCard = Random(mpWizard->GetSizeOfDeck());
+			mpWizard->ShuffleDeck(randCard);
+			randCard = Random(mpSorceress->GetSizeOfDeck());
+			mpSorceress->ShuffleDeck(randCard);
+		}
+	}
+
+	//break between setup and game
+	std::cout << std::endl;
+
 	//draw Sorceress first card
-	sorceress->setHandCard(Random(sorceress->getSizeOfDeck()));
-	sorceress->setTableCard(0);
-	std::cout << "Sorceress begins with " << sorceress->getTableCard(0).getName() << std::endl;
+	mpSorceress->SetHandCard(Random(mpSorceress->GetSizeOfDeck()));
+	//mpSorceress->SetTableCard(0);
+	std::cout << "Sorceress begins with " << mpSorceress->GetHandCard(0).GetName() << std::endl;
 
-	//draw wizard first card
-	wizard->setHandCard(Random(wizard->getSizeOfDeck()));
-	wizard->setTableCard(0);
-	std::cout << "Wizard begins with " << wizard->getTableCard(0).getName() << std::endl << std::endl;
-
-	//add card to hand 2 there is always 2 to choose from
-	sorceress->setHandCard(Random(sorceress->getSizeOfDeck()));
-	wizard->setHandCard(Random(wizard->getSizeOfDeck()));
-
+	//draw mpWizard first card
+	mpWizard->SetHandCard(Random(mpWizard->GetSizeOfDeck()));
+	//mpWizard->SetTableCard(0);
+	std::cout << "Wizard begins with " << mpWizard->GetHandCard(0).GetName() << std::endl << std::endl;
 
 	//game loop
-	while (playing)
+	while (mPlaying)
 	{
 		//check exit conditions
-		if (mRound >= mRoundMax) { return gameDraw; }
+		if (mRound >= ROUND_MAX) { return mGameDraw; }
 
 		/* 
 				STYLE GUIDE
 
 		Round <round number>
 		<Player name> draws <card name>
-		Cards on table: <card name> (<health>)
+		Cards on mTable: <card name> (<health>)
 		<card name>attacks <target>. <target> health now <health>
 		Or if the target is killed:
 		<card name>attacks <target>. <target> killed
 		*/
 
-		//Add a random card to each players hand
-		sorceress->setHandCard(Random(sorceress->getSizeOfDeck()));
-		wizard->setHandCard(Random(wizard->getSizeOfDeck()));
-
-
 		std::cout << "Round " << mRound + 1 << std::endl;
 
 #ifdef _DEBUG
 		std::cout << std::endl << "Wizard hand: " << std::endl << std::endl;
-		for (int i = 0; i < wizard->getSizeOfHand(); i++)
+		for (int i = 0; i < mpWizard->GetSizeOfHand(); ++i)
 		{
 			std::cout << "Card Number: "  << i << std::endl;
-			std::cout << "Card Type:	" << displayType(wizard->getHandCard(i).getType()) << " (" << wizard->getHandCard(i).getType() << ")" << std::endl;
-			std::cout << "Card Name:	" << wizard->getHandCard(i).getName() << std::endl;
-			std::cout << "Card Attack:	" << wizard->getHandCard(i).getAttack() << std::endl;
-			std::cout << "Card Health:	" << wizard->getHandCard(i).getHealth() << std::endl << std::endl;
+			std::cout << "Card Type:	" << DisplayType(mpWizard->GetHandCard(i).GetType()) << " (" << mpWizard->GetHandCard(i).GetType() << ")" << std::endl;
+			std::cout << "Card Name:	" << mpWizard->GetHandCard(i).GetName() << std::endl;
+			std::cout << "Card Attack:	" << mpWizard->GetHandCard(i).GetAttack() << std::endl;
+			std::cout << "Card Health:	" << mpWizard->GetHandCard(i).GetHealth() << std::endl << std::endl;
 		}
 		std::cout << std::endl << "Sorceress hand: " << std::endl << std::endl;
-		for (int i = 0; i < wizard->getSizeOfHand(); i++)
+		for (int i = 0; i < mpWizard->GetSizeOfHand(); ++i)
 		{
 			std::cout << "Card Number: " << i << std::endl;
-			std::cout << "Card Type:	" << displayType(sorceress->getHandCard(i).getType()) << " (" << sorceress->getHandCard(i).getType() << ")" << std::endl;
-			std::cout << "Card Name:	" << sorceress->getHandCard(i).getName() << std::endl;
-			std::cout << "Card Attack:	" << sorceress->getHandCard(i).getAttack() << std::endl;
-			std::cout << "Card Health:	" << sorceress->getHandCard(i).getHealth() << std::endl << std::endl;
+			std::cout << "Card Type:	" << DisplayType(mpSorceress->GetHandCard(i).GetType()) << " (" << mpSorceress->GetHandCard(i).GetType() << ")" << std::endl;
+			std::cout << "Card Name:	" << mpSorceress->GetHandCard(i).GetName() << std::endl;
+			std::cout << "Card Attack:	" << mpSorceress->GetHandCard(i).GetAttack() << std::endl;
+			std::cout << "Card Health:	" << mpSorceress->GetHandCard(i).GetHealth() << std::endl << std::endl;
 		}
 #endif
+		
+		// ** Play cards ** \\
 
-		//TODO: play spell cards
+		if ((mGameState = ControlPlayers(mpSorceress, mpWizard, false)) != mGamePlay) { return mGameState; }
+		if ((mGameState = ControlPlayers(mpWizard, mpSorceress, true)) != mGamePlay) { return mGameState; }
 
-		//sorceress draws card to table
-		sorceress->setTableCard(Random(sorceress->getSizeOfHand()));
-		std::cout << "Sorceress draws " << sorceress->getTableCard(sorceress->getSizeOfTable()-1).getName() << std::endl;
-
-		//wizard draws a card to the table
-		wizard->setTableCard(Random(wizard->getSizeOfHand()));
-		std::cout << "Wizard draws " << wizard->getTableCard(wizard->getSizeOfTable()-1).getName() << std::endl;
-
-		// ** SORCERESS PLAY ** \\
-
-		std::cout << "Card(s) on table: ";
-		for (int i = 0; i < sorceress->getSizeOfTable(); i++)
-		{
-			std::cout << sorceress->getTableCard(i).getName() << "(" << sorceress->getTableCard(i).getHealth() << ") ";
-		}
-		std::cout << std::endl;
-		if (sorceress->getSizeOfTable() != 0)
-		{
-			for (int i = 0; i < sorceress->getSizeOfTable(); ++i)
-			{
-				sorceress->getTableCard(i).play(sorceress, wizard, i, false);
-				//check return condition for a win
-				if (wizard->getHealth() <= 0) { return gameLose; }
-			}
-		}
-		else { std::cout << "Sorcceress has no cards to play!" << std::endl; }
-		std::cout << std::endl;
-
-		// ** WIZARD PLAY ** \\
-
-		std::cout << "Card(s) on table: ";
-		for (int i = 0; i < wizard->getSizeOfTable(); ++i)
-		{
-			std::cout << wizard->getTableCard(i).getName() << "(" << wizard->getTableCard(i).getHealth() << ") ";
-		}
-		std::cout << std::endl;
-
-		//ATTACK SORCERESS
-		if (wizard->getSizeOfTable() != 0)
-		{
-			for (int i = 0; i < wizard->getSizeOfTable(); ++i)
-			{
-				wizard->getTableCard(i).play(wizard, sorceress, i, true);
-				//check return condition for a win
-				if (sorceress->getHealth() <= 0) { return gameWin; }
-			}
-		} else { std::cout << "Wizard has no cards to play!" << std::endl; }
-
-		//end of round wait
-		pressToContinue();
-		drawLine();
+		//space between rounds
+		std::cout << std::endl << std::endl;
 		//increase round
 		mRound++;
 	}

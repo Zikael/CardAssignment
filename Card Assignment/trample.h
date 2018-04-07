@@ -8,50 +8,47 @@
 
 class CTrample : public CCard
 {
-	void play(CPlayer*& playerAttack, CPlayer*& playerHit, int index, bool playerControl)
+	void Play(CPlayer*& playerAttack, CPlayer*& playerHit, int index, bool playerControl)
 	{
-
-		//TODO: DEBUG SECTION PROPERLY
-
-		int leftoverDamage = playerAttack->getTableCard(index).getAttack();
+		int leftoverDamage = playerAttack->GetTableCard(index).GetAttack();
 		//loop until no damage left to be done
 		while (leftoverDamage > 0)
 		{
-			if (playerHit->getSizeOfTable() > 0)
+			if (playerHit->GetSizeOfTable() > 0)
 			{
 				int randCard = 0;
 				//Detect if the enemy has a wall, if so, only attack the wall
 				int wallType = 6;
-				for (int i = 0; i < playerHit->getSizeOfTable(); ++i)
+				for (int i = 0; i < playerHit->GetSizeOfTable(); ++i)
 				{
-					if (playerHit->getTableCard(i).getType() == wallType)
+					if (playerHit->GetTableCard(i).GetType() == wallType)
 					{
 						randCard = i;
 					}
 					else
 					{
-						//Attack a random card in player1 table 
+						//Attack a random card in player1 mTable 
 						//if the player1 has more than 1 card, randomly select a card to attack
-						if (playerHit->getSizeOfTable() >= 2) { randCard = rand() % playerHit->getSizeOfTable(); }
+						if (playerHit->GetSizeOfTable() >= 2) { randCard = rand() % playerHit->GetSizeOfTable(); }
 					}
 				}
 
 				//hold the current leftover damage
 				int tmpDamage = leftoverDamage;
 				//set new leftoverdamage
-				leftoverDamage -= playerHit->getTableCard(randCard).getHealth();
+				leftoverDamage -= playerHit->GetTableCard(randCard).GetHealth();
 				//set the health of the attacked card
-				playerHit->getTableCard(randCard).setHealth(playerHit->getTableCard(randCard).getHealth() - tmpDamage);
-				std::cout << playerAttack->getTableCard(index).getName() << " attacks " << playerHit->getTableCard(randCard).getName() << ". ";
-				if (playerHit->getTableCard(randCard).getArmour()) { playerHit->getTableCard(randCard).setHealth(playerHit->getTableCard(randCard).getHealth() + 1); }
-				if (playerHit->getTableCard(randCard).getHealth() <= 0)
+				playerHit->GetTableCard(randCard).SetHealth(playerHit->GetTableCard(randCard).GetHealth() - tmpDamage);
+				std::cout << playerAttack->GetTableCard(index).GetName() << " attacks " << playerHit->GetTableCard(randCard).GetName() << ". ";
+				if (playerHit->GetTableCard(randCard).GetArmour()) { playerHit->GetTableCard(randCard).SetHealth(playerHit->GetTableCard(randCard).GetHealth() + 1); }
+				if (playerHit->GetTableCard(randCard).GetHealth() <= 0)
 				{
 					//Display which card is killed
-					std::cout << playerHit->getTableCard(randCard).getName() << " killed." << std::endl;
+					std::cout << playerHit->GetTableCard(randCard).GetName() << " killed." << std::endl;
 					//REMOVE CARD FROM DECK
-					playerHit->removeTableCard(randCard);
+					playerHit->RemoveTableCard(randCard);
 				}
-				else { std::cout << playerHit->getTableCard(randCard).getName() << "'s health is now " << playerHit->getTableCard(randCard).getHealth() << std::endl; }
+				else { std::cout << playerHit->GetTableCard(randCard).GetName() << "'s health is now " << playerHit->GetTableCard(randCard).GetHealth() << std::endl; }
 
 			}
 			else
@@ -59,13 +56,13 @@ class CTrample : public CCard
 				//hold the current leftover damage
 				int tmpDamage = leftoverDamage;
 				//set new leftoverdamage, negative values cause the effect to keep attacking until everything is dead
-				leftoverDamage -= abs(playerHit->getHealth());
+				leftoverDamage -= abs(playerHit->GetHealth());
 				if (leftoverDamage < 0) { leftoverDamage = 0; }
 				//Attack player directly
-				playerHit->setHealth(playerHit->getHealth() - tmpDamage);
+				playerHit->SetHealth(playerHit->GetHealth() - tmpDamage);
 				//display new health levels
-				if (playerControl) { std::cout << playerAttack->getTableCard(index).getName() << " attacks Sorceress. Sorceress' health is now " << playerHit->getHealth() << std::endl; }
-				else { std::cout << playerAttack->getTableCard(index).getName() << " attacks Wizard. Wizard's health is now " << playerHit->getHealth() << std::endl; }
+				if (playerControl) { std::cout << playerAttack->GetTableCard(index).GetName() << " attacks Sorceress. Sorceress' health is now " << playerHit->GetHealth() << std::endl; }
+				else { std::cout << playerAttack->GetTableCard(index).GetName() << " attacks Wizard. Wizard's health is now " << playerHit->GetHealth() << std::endl; }
 			}
 		}
 	}

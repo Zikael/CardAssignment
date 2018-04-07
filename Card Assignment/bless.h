@@ -8,7 +8,7 @@
 
 class CBless : public CCard
 {
-	void play(CPlayer*& playerAttack, CPlayer*& playerHit, int index, bool playerControl)
+	void Play(CPlayer*& playerAttack, CPlayer*& playerHit, int index, bool playerControl)
 	{
 
 		int randChoice = rand() % 4;
@@ -16,46 +16,47 @@ class CBless : public CCard
 		{
 			//enemy minions
 			int randCard = 0;
-			if (playerHit->getSizeOfTable() != 0) { randCard = rand() % playerHit->getSizeOfTable(); }
+			if (playerHit->GetSizeOfTable() != 0) { randCard = rand() % playerHit->GetSizeOfTable(); }
 			else 
 			{ 
 				std::cout << "No cards for Bless to attack." << std::endl;
 				return;
 			}
-			playerHit->getTableCard(randCard).setHealth(playerHit->getTableCard(randCard).getHealth() - playerAttack->getTableCard(index).getAttack());
-			if (playerHit->getTableCard(randCard).getArmour()) { playerHit->getTableCard(randCard).setHealth(playerHit->getTableCard(randCard).getHealth() + 1); }
-			std::cout << playerAttack->getTableCard(index).getName() << " attacks " << playerHit->getTableCard(randCard).getName() << ". "
-				<< playerHit->getTableCard(randCard).getName() << "'s health is now " << playerHit->getTableCard(randCard).getHealth() << std::endl;
+			playerHit->GetTableCard(randCard).SetHealth(playerHit->GetTableCard(randCard).GetHealth() - playerAttack->GetHandCard(index).GetAttack());
+			if (playerHit->GetTableCard(randCard).GetArmour()) { playerHit->GetTableCard(randCard).SetHealth(playerHit->GetTableCard(randCard).GetHealth() + 1); }
+			std::cout << playerAttack->GetHandCard(index).GetName() << " attacks " << playerHit->GetTableCard(randCard).GetName() << ". "
+				<< playerHit->GetTableCard(randCard).GetName() << "'s health is now " << playerHit->GetTableCard(randCard).GetHealth() << std::endl;
 		}
 		else if (randChoice == 1)
 		{
 			//enemy player
-			if (playerControl) { std::cout << playerAttack->getTableCard(index).getName() << " attacks Sorceress. Sorceress' health is now " << playerHit->getHealth() << std::endl; }
-			else { std::cout << playerAttack->getTableCard(index).getName() << " attacks Wizard. Wizard's health is now " << playerHit->getHealth() << std::endl; }
+			if (playerControl) { std::cout << playerAttack->GetHandCard(index).GetName() << " attacks Sorceress. Sorceress' health is now " << playerHit->GetHealth() << std::endl; }
+			else { std::cout << playerAttack->GetHandCard(index).GetName() << " attacks Wizard. Wizard's health is now " << playerHit->GetHealth() << std::endl; }
 		}
 		else if (randChoice == 2)
 		{
 			//friendly minion
 			int randCard = 0;
-			if (playerAttack->getSizeOfTable() != 0) { int randCard = rand() % playerAttack->getSizeOfTable(); }
+			if (playerAttack->GetSizeOfTable() != 0) { int randCard = rand() % playerAttack->GetSizeOfTable(); }
 			else
 			{
 				std::cout << "No cards for Bless to heal." << std::endl;
 				return;
 			}
-			playerAttack->getTableCard(randCard).setHealth(playerAttack->getTableCard(randCard).getHealth() + playerAttack->getTableCard(index).getAttack());
-			std::cout << playerAttack->getTableCard(index).getName() << " heals " << playerAttack->getTableCard(randCard).getName() << ". "
-				<< playerAttack->getTableCard(randCard).getName() << "'s health is now " << playerAttack->getTableCard(randCard).getHealth() << std::endl;
+			playerAttack->GetTableCard(randCard).SetHealth(playerAttack->GetTableCard(randCard).GetHealth() + playerAttack->GetHandCard(index).GetAttack());
+			std::cout << playerAttack->GetHandCard(index).GetName() << " heals " << playerAttack->GetTableCard(randCard).GetName() << ". "
+				<< playerAttack->GetTableCard(randCard).GetName() << "'s health is now " << playerAttack->GetTableCard(randCard).GetHealth() << std::endl;
 		}
 		else if (randChoice == 3)
 		{
 			//self
-			if (playerControl) { std::cout << playerAttack->getTableCard(index).getName() << " heals Sorceress. Sorceress' health is now " << playerHit->getHealth() << std::endl; }
-			else { std::cout << playerAttack->getTableCard(index).getName() << " heals Wizard. Wizard's health is now " << playerHit->getHealth() << std::endl; }
+			playerAttack->SetHealth(playerAttack->GetHealth() + 2);
+			if (playerControl) { std::cout << playerAttack->GetHandCard(index).GetName() << " heals Wizard. Wizard's health is now " << playerAttack->GetHealth() << std::endl; }
+			else { std::cout << playerAttack->GetHandCard(index).GetName() << " heals Sorceress. Sorceress' health is now " << playerAttack->GetHealth() << std::endl; }
 		}
 
-		//remove from deck
-		playerAttack->removeTableCard(index);
+		//remove from mHand
+		playerAttack->RemoveHandCard(index);
 	}
 };
 #endif
