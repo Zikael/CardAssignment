@@ -174,7 +174,7 @@ int CGame::ControlPlayers(CPlayer*& pPlayerAttack, CPlayer*& pPlayerHit, bool pl
 int CGame::MainLoop()
 {
 	//Header
-	std::cout << "Michael Oliva | G20676646 | Firebrick" << std::endl << std::endl;
+	std::cout << "Firebrick <><" << std::endl << std::endl;
 
 	//Shuffle the mDeck option
 	
